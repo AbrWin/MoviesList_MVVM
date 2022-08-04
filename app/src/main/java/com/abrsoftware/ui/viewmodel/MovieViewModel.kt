@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abrsoftware.data.model.MovieModel
 import com.abrsoftware.domain.GetMoviesUserCase
+import com.abrsoftware.domain.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,7 +14,7 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private var getMovieUseCase: GetMoviesUserCase
 ) :ViewModel(){
-    val movieModel = MutableLiveData<MovieModel>()
+    val movieModel = MutableLiveData<Movie>()
     val isLoading = MutableLiveData<Boolean>()
 
     fun onCreate() {
@@ -22,7 +23,7 @@ class MovieViewModel @Inject constructor(
             val result = getMovieUseCase()
 
             if(!result.isNullOrEmpty()){
-                movieModel.postValue(result[0])
+                movieModel.postValue(result[1])
                 isLoading.postValue(false)
             }
         }

@@ -3,6 +3,7 @@ package com.abrsoftware.data.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.abrsoftware.domain.model.Movie
 
 /*Object that work with Room*/
 @Entity(tableName = "movies_table")
@@ -13,6 +14,13 @@ data class MovieEntity(
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "release_date") val release_date: String,
     @ColumnInfo(name = "poster_path") val poster_path: String,
-    @ColumnInfo(name = "overview") val overview: String,
-    @ColumnInfo(name = "type") val type: String
+    @ColumnInfo(name = "overview") val overview: String
+)
+
+fun Movie.toDatabase() = MovieEntity(
+    movieId = movieId,
+    title = title,
+    release_date = release_date,
+    poster_path = poster_path,
+    overview = overview
 )
